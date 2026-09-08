@@ -1,0 +1,14 @@
+{
+  "description": "Independent digital studio with editorial case studies, brand identities and a private project brief builder.",
+  "topics": [
+    "html",
+    "css",
+    "javascript",
+    "vite",
+    "accessibility",
+    "animation",
+    "design-studio",
+    "github-pages"
+  ],
+  "visibility": "public"
+}
