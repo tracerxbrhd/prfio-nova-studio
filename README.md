@@ -1,86 +1,87 @@
 # NOVA Studio
 
-An independent studio website that brings brand work, digital craft and a direct project conversation into one editorial experience.
+A fictional independent design-studio website built as an editorial frontend exercise in vanilla JavaScript.
 
-![Desktop](docs/screenshots/desktop.png)
+![NOVA Studio](docs/screenshots/desktop.png)
 
-![Case Study](docs/screenshots/case-study.png)
+The site presents four project case studies, studio services and process, collaborator quotes and a small project-brief builder. It is intentionally a visual portfolio experience rather than a client-management application or production contact service.
 
-![Mobile](docs/screenshots/mobile.png)
+## Selected work
 
-## Key features
+The work section can be filtered between brand and digital projects without navigating away from the page. Filter state is visible in the controls and the resulting project count is announced for assistive technology.
 
-- Four detailed project case studies with keyboard-accessible native dialogs.
-- Brand/digital filtering with visible state and live announcements.
-- Responsive navigation, progressive section reveals, animated counters and restrained pointer interaction.
-- Services, process, studio, keyboard-selectable collaborator quotes and a private project brief builder.
-- Validated brief form exports entered content without transmitting personal information.
+Each project opens into a native dialog with additional case-study material. Dialogs support keyboard dismissal and restore focus to the originating project when closed.
 
-## Technology
+![Case study](docs/screenshots/case-study.png)
 
-HTML5, CSS, vanilla JavaScript, Vite, ESLint, Prettier and Playwright.
+The featured identities and outcomes are fictional work created for this repository; they are not presented as commercial client engagements.
 
-## Local development
+## Interaction
+
+NOVA uses a deliberately small frontend stack: semantic HTML, CSS and vanilla JavaScript.
+
+`src/main.js` coordinates the responsive navigation, project filtering, case-study dialogs, section reveals, counters, collaborator quote selection and project brief. The implementation keeps those interactions in the browser without introducing a framework or application state library.
+
+The visual direction is editorial rather than application-like: oversized typography, asymmetric project presentation, ruled sections and restrained motion. Decorative movement is disabled when reduced motion is requested.
+
+## Project brief
+
+The contact section is a local brief builder rather than a submission form. It validates the required fields and exports the entered brief for the visitor to keep.
+
+No personal information is transmitted to a server because the project has no backend, email service or analytics integration. The brief exists only in the browser until the visitor downloads it or leaves the page.
+
+## Accessibility
+
+Interactive elements use semantic controls and visible keyboard focus. Case studies use native dialogs, filters expose their selected state, collaborator quotes are keyboard selectable, and the mobile navigation remains operable without pointer input.
+
+The browser suite also checks representative pages with axe. Automated checks are regression coverage, not a claim of complete accessibility certification.
+
+## Development
 
 Requires Node.js 24 and npm.
 
-~~~bash
+```bash
 npm ci
 npm run dev
-~~~
+```
 
-Open the local URL printed by Vite. There are no demo accounts or runtime secrets for this frontend-only project.
+Quality/build commands:
 
-## Configuration
-
-See .env.example. BASE_PATH is passed as an environment variable to Vite. Local builds default to ./ so assets remain relative. Repository Pages builds use /prfio-nova-studio/.
-
-~~~bash
+```bash
 npm run lint
 npm run build
-npm run preview
-~~~
-
-## Testing
-
-~~~bash
 npx playwright install chromium
 npm test
-~~~
+```
 
-Playwright starts a server on port 5191 and checks interactions, validation responsive layouts and automated axe accessibility checks. Captures go to docs/screenshots. See [QA.md](QA.md) for execution evidence. CI runs the suite before publishing.
+Tests cover project filtering and announced counts, dialog opening/Escape/focus restoration, whitespace-aware brief validation and download, keyboard quote selection, mobile navigation, local links/images, console errors and automated accessibility checks.
 
-## Deployment
+Vite supports a configurable `BASE_PATH`; the included GitHub Actions workflow validates and publishes the static build to GitHub Pages.
 
-The included GitHub Actions workflow validates, builds with the repository base path, uploads dist and deploys through GitHub Pages. Set **Settings → Pages → Source → GitHub Actions**, then push main or run the workflow manually. No live URL is claimed until publication succeeds.
+## Structure
 
-~~~bash
-gh auth login
-gh repo create prfio-nova-studio --public --source=. --remote=origin --push
-gh api --method POST repos/{owner}/prfio-nova-studio/pages -f build_type=workflow
-gh workflow run pages.yml
-~~~
+```text
+src/
+  main.js             Page interactions
+  style.css           Layout, typography and responsive states
+public/
+  media/              Project-specific visual asset
+  icons/              Local interface assets
+tests/                Browser interaction coverage
+docs/screenshots/     Captures of the running site
+.github/workflows/    Validation and Pages publishing
+```
 
-Replace {owner} with your GitHub login. If a remote exists, inspect it first; never force-push unrelated history. Description and topics are in .github/repository.json.
+![Mobile](docs/screenshots/mobile.png)
 
-## Architecture and structure
+## Assets
 
-~~~text
-src/                 Application logic, styles and local data
-public/              Local media, icons and credits page
-index.html           Entry document
-vite.config.js       Build and repository base configuration
-tests/               Browser and domain checks
-docs/screenshots/    Running application captures
-.github/workflows/   Validation and Pages deployment
-~~~
+The site uses system fonts and local interface assets. `public/media/velo.webp` is an original project-specific image created for the fictional VELO case study; the remaining work visuals are HTML/CSS compositions rather than downloaded client material.
 
-Product-specific modules own UI behaviour. Static media stays local. main.js owns navigation and interaction orchestration. Case study content and brief export stay local.
+No third-party stock photography or external font service is required at runtime.
 
-## Scope and limits
+## Scope
 
-The contact section exports a private brief and has no submission service. The featured identities form a curated design collection and do not assert commercial client outcomes. No analytics, cookies or external fonts are used.
+NOVA Studio is deliberately lightweight. It does not include a CMS, backend, persistent form submissions, authentication, analytics or external client data. Those omissions match the purpose of the project: demonstrating editorial frontend composition and interaction rather than simulating infrastructure that is not needed.
 
-## Design and credits
-
-[DESIGN.md](DESIGN.md) records the visual system. [CREDITS.md](CREDITS.md) records research, media and icon provenance. MIT-licensed source; dependencies retain their original licences.
+MIT licensed; dependencies retain their upstream licenses.
