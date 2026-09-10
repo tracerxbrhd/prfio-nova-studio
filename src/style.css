@@ -557,9 +557,26 @@ h2 {
   display: block;
   font-size: 12px;
 }
-.quote-person > span:last-child {
+.quote-controls {
   margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+.quote-controls button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: #20231d;
   font: 12px monospace;
+  cursor: pointer;
+}
+.quote-controls button[aria-pressed='true'] {
+  color: #d8ee61;
+  background: #20231d;
+}
+.quote-person > div:not(.quote-controls) {
+  flex: 1;
 }
 .contact {
   padding-block: 100px;

@@ -13,7 +13,7 @@ An independent studio website that brings brand work, digital craft and a direct
 - Four detailed project case studies with keyboard-accessible native dialogs.
 - Brand/digital filtering with visible state and live announcements.
 - Responsive navigation, progressive section reveals, animated counters and restrained pointer interaction.
-- Services, process, studio, collaborator quote and a private project brief builder.
+- Services, process, studio, keyboard-selectable collaborator quotes and a private project brief builder.
 - Validated brief form exports entered content without transmitting personal information.
 
 ## Technology

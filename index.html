@@ -278,7 +278,11 @@
       <section class="testimonial">
         <div class="wrap">
           <span class="eyebrow">WORDS FROM OUR COLLABORATORS</span>
-          <blockquote>
+          <blockquote
+            id="collaborator-quote"
+            aria-live="polite"
+            aria-atomic="true"
+          >
             “They asked the questions we hadn't thought to ask. The result felt
             like us — just clearer, braver and a lot better.”
           </blockquote>
@@ -287,7 +291,28 @@
             <div>
               <strong>Jamie Lawson</strong><span>Founder, Velo Collective</span>
             </div>
-            <span>01 / 02</span>
+            <div
+              class="quote-controls"
+              role="group"
+              aria-label="Collaborator quotes"
+            >
+              <button
+                type="button"
+                data-quote="0"
+                aria-label="Quote from Jamie Lawson"
+                aria-pressed="true"
+              >
+                01
+              </button>
+              <button
+                type="button"
+                data-quote="1"
+                aria-label="Quote from Mara Chen"
+                aria-pressed="false"
+              >
+                02
+              </button>
+            </div>
           </div>
         </div>
       </section>

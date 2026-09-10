@@ -16,6 +16,18 @@ test('project filters and keyboard accessible case study', async ({ page }) => {
   await expect(
     page.getByRole('button', { name: 'View Velo Collective case study' }),
   ).toBeFocused();
+  const secondQuote = page.getByRole('button', {
+    name: 'Quote from Mara Chen',
+  });
+  await secondQuote.focus();
+  await page.keyboard.press('Enter');
+  await expect(secondQuote).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('#collaborator-quote')).toContainText(
+    'room to breathe',
+  );
+  await expect(page.locator('.quote-person strong')).toHaveText('Mara Chen');
+  await page.getByRole('button', { name: 'Quote from Jamie Lawson' }).click();
+  await expect(page.locator('.quote-person strong')).toHaveText('Jamie Lawson');
 });
 test('validates the brief and downloads the entered information', async ({
   page,
@@ -27,6 +39,16 @@ test('validates the brief and downloads the entered information', async ({
   await expect(page.locator('#brief-status')).toBeEmpty();
   await page.getByLabel('Your name').fill('Alex Morgan');
   await page.getByLabel('Your email').fill('alex@example.com');
+  await page.getByLabel('What are you working on?').fill(' '.repeat(30));
+  await page
+    .getByRole('button', { name: 'Download your project brief' })
+    .click();
+  await expect(page.locator('#brief-status')).toBeEmpty();
+  expect(
+    await page
+      .getByLabel('What are you working on?')
+      .evaluate((field) => field.validationMessage),
+  ).toContain('20 characters');
   await page
     .getByLabel('What are you working on?')
     .fill('A new accessible website for a local architecture practice.');

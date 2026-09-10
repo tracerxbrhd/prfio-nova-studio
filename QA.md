@@ -27,7 +27,7 @@ On this workspace the browser download was shared through PLAYWRIGHT_BROWSERS_PA
 
 ## Coverage
 
-Project filtering and announced counts; case dialog opening, Escape and focus restoration; required form validation and actual brief download; navigation at 360px; local links and image loading; console errors; automated accessibility for main page and case dialog.
+Project filtering and announced counts; case dialog opening, Escape and focus restoration; required and whitespace-aware form validation and actual brief download; keyboard-selectable collaborator quotes; navigation at 360px; local links and image loading; console errors; automated accessibility for main page and case dialog.
 
 ## Fixes made during review
 
@@ -35,4 +35,4 @@ Small secondary labels were increased to at least 12px. Secondary text colours w
 
 ## Verification limits
 
-Automated accessibility checks complement keyboard and visual review; they are not a complete accessibility certification. Browser testing here used Chromium. GitHub Actions and the actual Pages deployment have not run remotely because GitHub CLI/authentication is unavailable in this environment. A live URL must be added only after successful publication.
+Automated accessibility checks complement keyboard and visual review; they are not a complete accessibility certification. Browser testing here used Chromium. GitHub Actions and the actual Pages deployment have not run remotely because GitHub CLI is not installed in this environment; authentication could not be checked. A live URL must be added only after successful publication.

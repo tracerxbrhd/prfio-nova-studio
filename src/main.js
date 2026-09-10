@@ -28,6 +28,36 @@ document.querySelectorAll('[data-filter]').forEach((button) => {
       count + ' projects shown';
   });
 });
+const collaboratorQuotes = [
+  {
+    quote:
+      "“They asked the questions we hadn't thought to ask. The result felt like us — just clearer, braver and a lot better.”",
+    name: 'Jamie Lawson',
+    role: 'Founder, Velo Collective',
+    initials: 'JL',
+  },
+  {
+    quote:
+      '“Our projects finally have room to breathe. Every detail, from the first sketch to the mobile experience, was considered.”',
+    name: 'Mara Chen',
+    role: 'Director, Form / Space',
+    initials: 'MC',
+  },
+];
+document.querySelectorAll('[data-quote]').forEach((button) => {
+  button.addEventListener('click', () => {
+    const selected = collaboratorQuotes[Number(button.dataset.quote)];
+    document.querySelector('#collaborator-quote').textContent = selected.quote;
+    document.querySelector('.quote-person .avatar').textContent =
+      selected.initials;
+    document.querySelector('.quote-person strong').textContent = selected.name;
+    document.querySelector('.quote-person div > span').textContent =
+      selected.role;
+    document.querySelectorAll('[data-quote]').forEach((item) => {
+      item.setAttribute('aria-pressed', String(item === button));
+    });
+  });
+});
 const cases = {
   velo: {
     name: 'Velo Collective',
@@ -154,8 +184,24 @@ const counterObserver = new IntersectionObserver((entries) =>
 document
   .querySelectorAll('[data-count]')
   .forEach((element) => counterObserver.observe(element));
-document.querySelector('#brief-form').addEventListener('submit', (event) => {
+const briefForm = document.querySelector('#brief-form');
+briefForm.addEventListener('input', (event) => {
+  event.target.setCustomValidity?.('');
+});
+briefForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  for (const name of ['name', 'message']) {
+    const field = briefForm.elements.namedItem(name);
+    const minimum = name === 'message' ? 20 : 1;
+    field.setCustomValidity(
+      field.value.trim().length < minimum
+        ? name === 'message'
+          ? 'Please describe your project in at least 20 characters.'
+          : 'Please enter your name.'
+        : '',
+    );
+  }
+  if (!briefForm.reportValidity()) return;
   const values = new FormData(event.currentTarget);
   const content =
     'NOVA STUDIO — PROJECT BRIEF\n\nName: ' +
